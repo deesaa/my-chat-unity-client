@@ -16,9 +16,13 @@ public class UsersListView : MonoBehaviour
     {
         foreach (var user in _users)
         {
-            Destroy(user.gameObject);
+            user.Destroy();
         }
         _users.Clear();
+        foreach (Transform t in UsersContainer)
+        {
+            Destroy(t.gameObject);
+        }
     }
 
     public bool Contains(string username)

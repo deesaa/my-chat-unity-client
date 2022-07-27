@@ -44,6 +44,11 @@ public class MessageTextElementView : MonoBehaviour, IMessageElementView
         instance.SetTextColor(textColor);
         return instance;
     }
+    
+    public void Destroy()
+    {
+        Destroy(gameObject.transform);
+    }
 
     public static MessageTextElementView Create(MessageTextElementView prefab, MessageDto message)
     {

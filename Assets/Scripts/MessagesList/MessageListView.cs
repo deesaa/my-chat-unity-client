@@ -8,9 +8,7 @@ using UnityEngine.UI;
 public class MessageListView : MonoBehaviour
 {
     private Animator _animator;
-        
-    //[SerializeField] private InputField MessageInputField;
-    //[SerializeField] private Button SubmitMessageButton;
+    
     [SerializeField] private InputMessageForm InputMessageForm;
     [SerializeField] private Transform MessagesContainer;
 
@@ -25,6 +23,19 @@ public class MessageListView : MonoBehaviour
     {
         _messages.Add(messageElementView);
         messageElementView.Transform.SetParent(MessagesContainer);
+    }
+
+    public void ClearMessages()
+    {
+        foreach (var messageElementView in _messages)
+        {
+            messageElementView.Destroy();
+        }
+        _messages.Clear();
+        foreach (Transform message in MessagesContainer)
+        {
+            Destroy(message.gameObject);
+        }
     }
     
     public void ChangeTextColorForUser(string username, string newColor)

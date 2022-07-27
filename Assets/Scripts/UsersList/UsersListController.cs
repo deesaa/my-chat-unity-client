@@ -21,6 +21,18 @@ public class UsersListController : MonoBehaviour
         UnityChatListener.OnOtherClientConnectedEvent += OnUserJoined;
         UnityChatListener.OnOtherClientDisconnectedEvent += OnUserLeft;
         UnityChatListener.OnUsersOnServerListEvent += FillUsersData;
+        UnityChatListener.OnLoginSuccessEvent += OnLoginSuccess;
+    }
+
+    private void OnLoginSuccess()
+    {
+        RequestUsersData();
+    }
+
+    private void RequestUsersData()
+    {
+        usersList.Clear();
+        _chatConnection.RequestUsersOnServerData();
     }
 
     private void FillUsersData(UserDto[] users)
@@ -64,5 +76,6 @@ public class UsersListController : MonoBehaviour
         UnityChatListener.OnOtherClientConnectedEvent -= OnUserJoined;
         UnityChatListener.OnOtherClientDisconnectedEvent -= OnUserLeft;
         UnityChatListener.OnUsersOnServerListEvent -= FillUsersData;
+        UnityChatListener.OnLoginSuccessEvent -= OnLoginSuccess;
     }
 }

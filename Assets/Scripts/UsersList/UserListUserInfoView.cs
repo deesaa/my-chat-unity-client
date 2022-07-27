@@ -29,4 +29,9 @@ public class UserListUserInfoView : MonoBehaviour
         instance.SetName(username);
         return instance;
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

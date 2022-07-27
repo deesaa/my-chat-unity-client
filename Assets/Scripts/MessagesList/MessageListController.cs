@@ -29,6 +29,20 @@ public class MessageListController : MonoBehaviour
         UnityChatListener.OnOtherClientConnectedEvent += OnUserJoined;
         UnityChatListener.OnOtherClientDisconnectedEvent += OnUserLeft;
         UnityChatListener.OnUserChangedTextColorEvent += OnUserTextColorChanged;
+        UnityChatListener.OnLoginSuccessEvent += OnLoginSuccess;
+        
+        messageList.ClearMessages();
+    }
+
+    private void OnLoginSuccess()
+    {
+        PullMessagesFromServerRequest();
+    }
+
+    private void PullMessagesFromServerRequest()
+    {
+        messageList.ClearMessages();
+        _chatConnection.RequestLastMessages(10);
     }
 
     private void OnNewMessage(MessageDto message)
@@ -60,5 +74,6 @@ public class MessageListController : MonoBehaviour
         UnityChatListener.OnOtherClientConnectedEvent -= OnUserJoined;
         UnityChatListener.OnOtherClientDisconnectedEvent -= OnUserLeft;
         UnityChatListener.OnUserChangedTextColorEvent -= OnUserTextColorChanged;
+        UnityChatListener.OnLoginSuccessEvent -= OnLoginSuccess;
     }
 }

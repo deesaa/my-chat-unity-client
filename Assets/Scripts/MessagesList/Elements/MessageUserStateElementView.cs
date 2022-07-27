@@ -5,6 +5,10 @@ using UnityEngine;
 public class MessageUserStateElementView : MonoBehaviour, IMessageElementView
 {
     public Transform Transform => transform;
+    public void Destroy()
+    {
+        Destroy(gameObject.transform);
+    }
 
     [SerializeField] private TMP_Text Text;
     private string _username;
